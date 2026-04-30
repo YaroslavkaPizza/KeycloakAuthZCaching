@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Shifts_Tools.Services.Plumbing.Authorization
+namespace KeycloakAuthZCaching.Plumbing.Authorization
 {
     public interface IPermissionCacheService
     {

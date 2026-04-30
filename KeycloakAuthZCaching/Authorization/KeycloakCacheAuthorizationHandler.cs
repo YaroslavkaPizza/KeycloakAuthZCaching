@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shifts_Tools.Services.Plumbing.Authorization
+namespace KeycloakAuthZCaching.Plumbing.Authorization
 {
     /// <summary>
     /// Authorization Handler для кэширования проверок RequireProtectedResource через PermissionService

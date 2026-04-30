@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Shifts_Tools.Services.Plumbing.Extensions
+namespace KeycloakAuthZCaching.Plumbing.Authorization.Extensions
 {
     public static class PermissionServiceExtensions
     {

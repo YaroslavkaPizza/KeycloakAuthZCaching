@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Shifts_Tools.Services.Plumbing.Authorization
+namespace KeycloakAuthZCaching.Services.Authorization
 {
     public interface IPermissionService
     {

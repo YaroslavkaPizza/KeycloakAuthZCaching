@@ -1,4 +1,4 @@
-﻿namespace Shifts_Tools.Services.Plumbing.Authorization
+﻿namespace KeycloakAuthZCaching.Plumbing.Authorization
 {
     /// <summary>
     /// Режим проверки разрешений

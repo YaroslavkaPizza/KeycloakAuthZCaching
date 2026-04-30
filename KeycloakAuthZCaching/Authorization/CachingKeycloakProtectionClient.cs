@@ -2,7 +2,7 @@
 using Keycloak.AuthServices.Authorization.AuthorizationServer;
 using System.Reflection;
 
-namespace Shifts_Tools.Services.Plumbing.Authorization
+namespace KeycloakAuthZCaching.Plumbing.Authorization
 {
 
     public class CachingAuthorizationServerClientDecorator : IAuthorizationServerClient
