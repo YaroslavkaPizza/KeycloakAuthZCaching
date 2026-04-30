@@ -66,7 +66,7 @@ This library provides **automatic caching** for all Keycloak Protection API call
 
 ### NuGet Package
 
-    dotnet add package YourPackageName
+    dotnet add package KeycloakAuthZ.Caching
 
 The package includes all necessary dependencies:
 - `Keycloak.AuthServices.Authentication`
