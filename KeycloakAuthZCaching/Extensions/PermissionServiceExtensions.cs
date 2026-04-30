@@ -1,7 +1,7 @@
 ﻿using Keycloak.AuthServices.Authorization.AuthorizationServer;
+using KeycloakAuthZCaching.Services.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
-using Shifts_Tools.Services.Plumbing.Authorization;
 using System;
 using System.Linq;
 using System.Linq.Expressions;

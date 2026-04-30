@@ -1,4 +1,5 @@
 ﻿using Keycloak.AuthServices.Authorization.Requirements;
+using KeycloakAuthZCaching.Plumbing.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
