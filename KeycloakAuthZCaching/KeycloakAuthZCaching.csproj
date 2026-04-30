@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>KeycloakAuthZ.Caching</PackageId>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Authors>Aleshin Yaroslav</Authors>
 		<Description>Services for easy permission caching setup with IDistributedCache</Description>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -15,6 +15,12 @@
 		<DebugSymbols>true</DebugSymbols>
 		<CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
 		<CopyDocumentationFilesFromPackages>true</CopyDocumentationFilesFromPackages>
+		<PackageProjectUrl>https://github.com/YaroslavkaPizza/KeycloakAuthZCaching</PackageProjectUrl>
+		<!-- Ссылка непосредственно на репозиторий -->
+		<RepositoryUrl>https://github.com/YaroslavkaPizza/KeycloakAuthZCaching.git</RepositoryUrl>
+		<!-- Тип репозитория (помогает NuGet понять, как с ним работать) -->
+		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -30,5 +36,15 @@
 		<PackageReference Include="StackExchange.Redis" Version="2.9.*" />
 		<PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="8.0.0-*"/>
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0-*"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0-*" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- Включаем файл в пакет, чтобы NuGet его увидел -->
+		<None Include="README.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 </Project>
