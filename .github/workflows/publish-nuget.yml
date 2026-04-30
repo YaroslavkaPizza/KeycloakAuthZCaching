@@ -1,7 +1,7 @@
 name: Publish NuGet Package
 on:
   push:
-    branches: [ main ]  # or trigger on: release: types: [published]
+    branches: [ master ]  # or trigger on: release: types: [published]
 jobs:
   build:
     runs-on: ubuntu-latest
