@@ -17,6 +17,7 @@ namespace KeycloakAuthZCaching.Plumbing.Authorization
         Task<bool?> GetAsync(string key);
         Task SetAsync(string key, bool value);
         Task<string> GetPermissionCacheKeyAsync(string resource, string? scope);
+        Task<string> GetPermissionCacheKeyAsync(ClaimsPrincipal user, string resource, string? scope);
         Task<string> GetPolicyCacheKeyAsync(string policyName);
         Task ClearCacheAsync();
         PermissionCacheStatistics GetStatistics();
@@ -141,6 +142,28 @@ namespace KeycloakAuthZCaching.Plumbing.Authorization
         }
 
         /// <summary>
+        /// Получить ключ кэша для разрешения (resource + scope)
+        /// </summary>
+        public async Task<string> GetPermissionCacheKeyAsync(ClaimsPrincipal user, string resource, string? scope)
+        {
+            await EnsureUserInfoLoadedAsync(user);
+
+            return string.IsNullOrEmpty(scope)
+                ? $"perm:{_cachedUserId}:{_cachedSessionId}:{resource}"
+                : $"perm:{_cachedUserId}:{_cachedSessionId}:{resource}:{scope}";
+        }
+
+        /// <summary>
+        /// Получить ключ кэша для политики
+        /// </summary>
+        public async Task<string> GetPolicyCacheKeyAsync(ClaimsPrincipal user, string policyName)
+        {
+            await EnsureUserInfoLoadedAsync(user);
+
+            return $"policy:{_cachedUserId}:{_cachedSessionId}:{policyName}";
+        }
+
+        /// <summary>
         /// Очистить весь кэш
         /// </summary>
         public async Task ClearCacheAsync()
@@ -180,6 +203,27 @@ namespace KeycloakAuthZCaching.Plumbing.Authorization
 
             var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
+
+            if (user?.Identity?.IsAuthenticated != true)
+            {
+                _cachedUserId = "anonymous";
+                _cachedSessionId = "none";
+                return;
+            }
+
+            _cachedUserId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                ?? user.FindFirst("sub")?.Value
+                ?? user.FindFirst("preferred_username")?.Value
+                ?? "unknown";
+
+            _cachedSessionId = GetSessionIdFromUser(user);
+        }
+
+        private async Task EnsureUserInfoLoadedAsync(ClaimsPrincipal user)
+        {
+            // Если уже загружено - возвращаем
+            if (_cachedUserId != null && _cachedSessionId != null)
+                return;
 
             if (user?.Identity?.IsAuthenticated != true)
             {

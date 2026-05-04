@@ -42,7 +42,7 @@ namespace KeycloakAuthZCaching.Plumbing.Authorization
                 var scope = requirement.Scopes; // Keycloak.AuthServices использует Roles как scopes
 
                 // Генерируем ключ кэша
-                var cacheKey = await _cacheService.GetPermissionCacheKeyAsync(resource, scope.FirstOrDefault());
+                var cacheKey = await _cacheService.GetPermissionCacheKeyAsync(context.User, resource, scope.FirstOrDefault());
 
                 // Проверяем кэш
                 var cachedValue = await _cacheService.GetAsync(cacheKey);
