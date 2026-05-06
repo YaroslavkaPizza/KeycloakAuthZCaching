@@ -124,6 +124,42 @@ namespace KeycloakAuthZCaching.Plumbing.Authorization.Extensions
         }
 
         /// <summary>
+        /// Добавляет Permission Service с Redis distributed cache
+        /// </summary>
+        public static IServiceCollection AddPermissionServiceWithRedis(
+            this IServiceCollection services,
+            string redisConnectionString,
+            string? instanceName = "PermissionCache_",
+            Action<PermissionCacheOptions>? configureOptions = null)
+        {
+            // Настраиваем опции кэша
+            if (configureOptions != null)
+            {
+                services.Configure(configureOptions);
+            }
+            else
+            {
+                services.Configure<PermissionCacheOptions>(options => { });
+            }
+
+            // Redis distributed cache
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnectionString;
+                options.InstanceName = instanceName;
+            });
+
+            // Регистрируем сервисы
+            services.AddScoped<IPermissionCacheService, PermissionCacheService>();
+            services.AddScoped<IPermissionService, PermissionService>();
+
+            // Регистрируем Authorization Handler
+            services.AddScoped<IAuthorizationHandler, KeycloakCacheAuthorizationHandler>();
+
+            return services;
+        }
+
+        /// <summary>
         /// Добавляет Permission Service с кастомным IDistributedCache
         /// </summary>
         public static IServiceCollection AddPermissionServiceWithCustomCache(
